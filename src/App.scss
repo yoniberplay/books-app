@@ -25,7 +25,7 @@ $medium-gray: #d2d6d5;
 $dark-gray: #313131;
 $black: #000;
 $white: #fff;
-$navmenu:#521D01;
+$navmenu:#9E4D21;
 // Typography
 $body-font-family: 'Lato',
 'Helvetica Neue',
@@ -196,9 +196,9 @@ p.author {
       border-bottom: 3px solid $primary;
     }
     &:hover {
-      color: $primary;
+      color: $navmenu;
       font-weight: bold;
-      border-bottom: 3px solid $primary;
+      border-bottom: 3px solid $navmenu;
     }
   }
 }
@@ -207,7 +207,7 @@ p.author {
 
 
 .book-item {
-  margin: 15px 0;
+  margin: 5px 0;
   padding: 15px;
   list-style-type: none;
   background-color: white;
@@ -223,7 +223,7 @@ p.author {
   }
   .item-img {
     display: inline-block;
-    float: left;
+    // float: left;
     padding-right: 30px;
     img {
       box-shadow: 0 0 0 0 transparent;
@@ -401,9 +401,9 @@ p.author {
 }
 
 #footer {
-  margin-left: -1.5%;
+  
   padding: 10px 0 10px;
-  border-top: 1px solid $white;
+  border-top: 2px solid $navmenu;
   background-color: #9E4D21;
   width: 100%;
   div,

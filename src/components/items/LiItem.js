@@ -2,6 +2,7 @@ import "../../App.scss";
 
 const LiItem = (props) => {
   return (
+    
     <li className="book-item ">
       <div className="bk-img">
         <div className="bk-wrapper">
@@ -16,17 +17,19 @@ const LiItem = (props) => {
       </div>
 
       <div className="flex flex-wrap">
+        
         <h3 className="">{props.Title}</h3>
         <p className="author">
           by {props.Author} &bull; {props.Year}
         </p>
+
         <p>{props.Details}</p>
-        {/* <a href="#asdf" className="bg-btndetails p-1 rounded mt-1 text-white">
-                  Details
-                </a> */}
+        
+        
+        
         <button
           type="button"
-          className="text-white bg-primario hover:bg-primario800 focus:ring-4 focus:outline-none focus:primario700 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primario700 dark:hover:bg-primario700 dark:focus:ring-primario800"
+          className="text-white bg-footer hover:bg-navmenu focus:ring-4 focus:outline-none focus:primario700 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primario700 dark:hover:bg-primario700 dark:focus:ring-primario800 mt-3"
         >
           Details
           <svg
@@ -43,6 +46,8 @@ const LiItem = (props) => {
             ></path>
           </svg>
         </button>
+
+
       </div>
     </li>
   );

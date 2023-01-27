@@ -9,7 +9,7 @@ const ListLiItem = (props) => {
 
     });
     return (
-        <div className="grid md:grid-cols-3 md:gap-4 ">
+        <div className="grid lg:grid-cols-3 lg:gap-3 ">
        {items}       
        </div>
     )
