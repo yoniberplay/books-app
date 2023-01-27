@@ -1,0 +1,445 @@
+/*
+ *  Imports
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700,900);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700);
+@import url('https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css');
+
+/*
+ *  Variables
+*/
+
+$global-width: 1024px;
+// Colors
+$library-palette: ( primary: #219e9a,
+);
+$primary: #219e9a;
+$fantasy: #e3b005;
+$scifi:#fcc278;
+$classics:#db2e0f;  
+$fairy:#725d64;
+$youngadultu:#2c63a0;
+$light-gray: #ecf0f1;
+$medium-gray: #d2d6d5;
+$dark-gray: #313131;
+$black: #000;
+$white: #fff;
+$navmenu:#521D01;
+// Typography
+$body-font-family: 'Lato',
+'Helvetica Neue',
+Helvetica,
+Arial,
+sans-serif;
+
+/* Single Line truncation */
+
+@mixin truncate() {
+  // width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* Multiline truncation */
+@mixin multi-truncate($font-size: 15px,
+$line-height: 1.4,
+$lines-to-show: 3) {
+  display: block;
+  display: -webkit-box;
+  height: $font-size * $line-height * $lines-to-show;
+  /* Fallback for non-webkit */
+  font-size: $font-size;
+  line-height: $line-height;
+  -webkit-line-clamp: $lines-to-show;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+/*
+ *  Global styles
+*/
+
+html,
+body,
+.main,
+.main-container {
+  height: 100%;
+}
+
+body {
+  font-family: $body-font-family;
+  color: $dark-gray;
+  background: $light-gray;
+}
+
+.row {
+  max-width: $global-width;
+}
+
+
+/*
+ *  Typography
+*/
+
+body,
+p,
+a,
+li {
+  font-family: $body-font-family;
+  font-size: 15px;
+}
+
+a {
+  color: $primary;
+}
+
+h2,
+h3 {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  color: $dark-gray;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  margin-bottom: 12px;
+  font-size: 22px;
+  line-height: 40px;
+  color: rgba($dark-gray, 0.7);
+}
+
+p:not(.author) {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+p.author {
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+  font-weight: 400;
+  color: rgba($dark-gray, 0.5);
+}
+
+
+
+
+
+
+
+/*
+ *  Off Canvas Menu
+*/
+
+.main-container {
+  position: relative;
+  overflow-x: hidden;
+  &.prevent-scroll,
+  &.nav-menu-open {
+    overflow: hidden;
+  }
+}
+
+
+
+
+
+/*
+ *  book List
+*/
+
+// Filterable
+.toolbar {
+  margin-bottom: 30px;
+  // max-width: 960px;
+  border-bottom: 1px solid $medium-gray;
+  select {
+    margin-bottom: 7px;
+    color: $dark-gray;
+    font-size: 14px;
+    border: none;
+    // border-bottom: 1px solid rgba($dark-gray, 0.45);
+    background-color: transparent;
+  }
+  .filter-options {
+    line-height: 40px;
+  }
+  a.filter-item {
+    margin-right: 16px;
+    padding-bottom: 18px;
+    font-size: 14px;
+    color: $dark-gray;
+    //border-bottom: 0px solid transparent;
+    transition: all 250ms ease-out;
+    &:last-child {
+      margin-right: 0;
+    }
+    &.active {
+      color: $primary;
+      font-weight: bold;
+      border-bottom: 3px solid $primary;
+    }
+    &:hover {
+      color: $primary;
+      font-weight: bold;
+      border-bottom: 3px solid $primary;
+    }
+  }
+}
+
+// List Items
+
+
+.book-item {
+  margin: 15px 0;
+  padding: 15px;
+  list-style-type: none;
+  background-color: white;
+  &:hover {
+    
+    .bk-bookdefault {
+      -webkit-transform: rotate3d(0, 1, 0, 25deg);
+      transform: rotate3d(0, 1, 0, 25deg);
+    }
+    .bk-back {
+      opacity: 1;
+    }
+  }
+  .item-img {
+    display: inline-block;
+    float: left;
+    padding-right: 30px;
+    img {
+      box-shadow: 0 0 0 0 transparent;
+      transition: all 250ms ease-out;
+    }
+  }
+  .item-details {
+    padding-right: 30px;
+  }
+  h3 {
+    @include truncate;
+  }
+  p:not(.author) {
+    @include multi-truncate;
+  }
+}
+
+
+/*
+ *  Book Rotate
+*/
+
+.bk-img {
+  position: relative;
+  display: inline-block;
+  float: left;
+  padding-right: 30px;
+  list-style: none;
+  .bk-wrapper {
+    position: relative;
+    width: 150px;
+    height: 215px;
+    float: left;
+    z-index: 1;
+    -webkit-perspective: 1400px;
+    perspective: 1400px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  .bk-book {
+    position: absolute;
+    width: 100%;
+    height: 215px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: -webkit-transform .5s;
+    transition: transform .5s;
+  }
+  .bk-book > div,
+  .bk-front > div {
+    display: block;
+    position: absolute;
+  }
+  .bk-front {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform-origin: 0% 50%;
+    transform-origin: 0% 50%;
+    -webkit-transition: -webkit-transform .5s;
+    transition: transform .5s;
+    -webkit-transform: translate3d(0, 0, 20px);
+    transform: translate3d(0, 0, 20px);
+    z-index: 10;
+    > div {
+      z-index: 1;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      border-radius: 0 3px 3px 0;
+      box-shadow: inset 4px 0 10px rgba(0, 0, 0, 0.1);
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      top: 1px;
+      bottom: 1px;
+      left: -1px;
+      width: 1px;
+    }
+  }
+  .bk-front,
+  .bk-back,
+  .bk-front > div {
+    width: 150px;
+    height: 215px;
+  }
+  .bk-left,.bk-scifi,.bk-classics,.bk-fairy,.bk-youngadultu,.bk-fantasy,
+  .bk-right {
+    width: 40px;
+    left: -20px;
+  }
+  // .bk-back {
+  //   -webkit-transform: rotate3d(0, 1, 0, -180deg) translate3d(0, 0, 20px);
+  //   transform: rotate3d(0, 1, 0, -180deg) translate3d(0, 0, 20px);
+  //   box-shadow: 5px 7px 15px rgba(0, 0, 0, 0.3);
+  //   border-radius: 3px 0 0 3px;
+  //   opacity: 0;
+  //   transition: opacity 250ms ease-out;
+  //   &:after {
+  //     content: '';
+  //     position: absolute;
+  //     top: 0;
+  //     left: 10px;
+  //     bottom: 0;
+  //     width: 3px;
+  //     background: rgba(0, 0, 0, 0.06);
+  //     box-shadow: 1px 0 3px rgba(255, 255, 255, 0.1);
+  //   }
+  // }
+  .bk-left,.bk-scifi,.bk-classics,.bk-fairy,.bk-youngadultu,.bk-fantasy {
+    height: 215px;
+    -webkit-transform: rotate3d(0, 1, 0, -90deg);
+    transform: rotate3d(0, 1, 0, -90deg);
+    h2 {
+      width: 215px;
+      height: 40px;
+      -webkit-transform-origin: 0 0;
+      -moz-transform-origin: 0 0;
+      transform-origin: 0 0;
+      -webkit-transform: rotate(90deg) translateY(-40px);
+      transform: rotate(90deg) translateY(-40px);
+    }
+  }
+  .bk-cover {
+    background-repeat: no-repeat;
+    background-position: 10px 40px;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10px;
+      bottom: 0;
+      width: 3px;
+      background: rgba(0, 0, 0, 0.06);
+      box-shadow: 1px 0 3px rgba(255, 255, 255, 0.1);
+    }
+  }
+  /* Individual style & artwork */
+  .bk-cover {
+    background-repeat: no-repeat;
+    background-position: top left !important;
+   
+  }
+  
+  .bk-front > #bk-left,
+  .bk-left{
+    background-color: $primary;
+  }
+  
+  .bk-front > #bk-fantasy,.bk-fantasy{
+    background-color: $fantasy;
+  }
+
+  .bk-front > #bk-scifi,.bk-scifi{
+    background-color: $scifi;
+  }
+
+  .bk-front > #bk-classics,.bk-classics{
+    background-color: $classics;
+  }
+
+  .bk-front > #bk-fairy,.bk-fairy{
+    background-color: $fairy;
+  }
+
+  .bk-front > #bk-youngadultu,.bk-youngadultu{
+    background-color: $youngadultu;
+  }
+
+
+
+
+}
+
+#footer {
+  margin-left: -1.5%;
+  padding: 10px 0 10px;
+  border-top: 1px solid $white;
+  background-color: #9E4D21;
+  width: 100%;
+  div,
+  a,
+  p {
+    color: $white;
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 100%;
+  height:  100%;
+  margin-top: 20%;
+  display: flex;
+  justify-content: center;
+  
+}
+.lds-dual-ring:after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid $primary;
+  border-color: $primary transparent $primary transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
