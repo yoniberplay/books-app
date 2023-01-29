@@ -1,12 +1,15 @@
+import React from "react";
 import "../../App.scss";
 
+
 const LiItem = (props) => {
+
   return (
     
     <li className="book-item ">
       <div className="bk-img">
         <div className="bk-wrapper">
-          <div className="bk-book bk-bookdefault cursor-pointer">
+          <div onClick={props.showDetails} className="bk-book bk-bookdefault cursor-pointer">
             <div className="bk-front">
               <div id={props.bk} className="bk-cover "></div>
             </div>
@@ -28,6 +31,7 @@ const LiItem = (props) => {
         
         
         <button
+          onClick={props.showDetails}
           type="button"
           className="text-white bg-footer hover:bg-navmenu focus:ring-4 focus:outline-none focus:primario700 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primario700 dark:hover:bg-primario700 dark:focus:ring-primario800 mt-3"
         >

@@ -8,13 +8,18 @@ const Nav = ( props ) => {
   const searchElement = React.useRef();
 
 const searchClick = ( e )=> {
-  
-  if(searchElement.current.value === "" || searchElement.current.value.trim().length === 0){
+
+  if (e.key === 'Enter' || !e.key) {
+    if(searchElement.current.value === "" || searchElement.current.value.trim().length === 0){
     
-  }else{
-    props.onSearchClick( searchElement.current.value.toUpperCase() );
+    }else{
+      props.onSearchClick( searchElement.current.value.toUpperCase() );
+    }
+    searchElement.current.value = "";
   }
-  searchElement.current.value = "";
+
+  
+  
 }
 
 
@@ -27,19 +32,19 @@ const searchClick = ( e )=> {
           <a href="#allcategories" onClick={props.clickallcategories} className="filter-item " data-group="all">
             All Categories
           </a>
-          <a href="#asdfas" className="filter-item" data-group="fantasy">
+          <a onClick={()=> {props.onCategoryClick({ type: 'bk-fantasy' })}} href="#Fantasy" className="filter-item" data-group="fantasy">
             Fantasy
           </a>
-          <a href="#asdfasd" className="filter-item" data-group="sci-fi">
+          <a onClick={()=> {props.onCategoryClick({ type: 'bk-scifi' })}} href="#Sci-Fi" className="filter-item" data-group="sci-fi">
             Sci-Fi
           </a>
-          <a href="#saf" className="filter-item" data-group="classic">
+          <a onClick={()=> {props.onCategoryClick({ type: 'bk-classics' })}} href="#Classics" className="filter-item" data-group="classic">
             Classics
           </a>
-          <a href="#asfdasd" className="filter-item" data-group="fairy">
+          <a onClick={()=> {props.onCategoryClick({ type: 'bk-fairy' })}} href="#Fairy-Tale" className="filter-item" data-group="fairy">
             Fairy Tale
           </a>
-          <a href="#asdf" className="filter-item" data-group="young">
+          <a onClick={()=> {props.onCategoryClick({ type: 'bk-youngadultu' })}} href="#Young-Adult" className="filter-item" data-group="young">
             Young Adult
           </a>
         </div>
@@ -47,7 +52,7 @@ const searchClick = ( e )=> {
         <div className="flex mt-5 md:m-0 ">
           <input
           ref={searchElement}
-            
+            onKeyDown={searchClick}
             className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border-2 border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primario	 focus:outline-none"
             placeholder="Search"
             aria-label="Search"
