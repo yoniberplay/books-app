@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/books-app/static/css/main.aa41c4ce.css",
-    "main.js": "/books-app/static/js/main.3166d1d0.js",
+    "main.css": "/books-app/static/css/main.471ab6b8.css",
+    "main.js": "/books-app/static/js/main.30690011.js",
     "static/js/787.e27c011a.chunk.js": "/books-app/static/js/787.e27c011a.chunk.js",
     "index.html": "/books-app/index.html",
-    "main.aa41c4ce.css.map": "/books-app/static/css/main.aa41c4ce.css.map",
-    "main.3166d1d0.js.map": "/books-app/static/js/main.3166d1d0.js.map",
+    "main.471ab6b8.css.map": "/books-app/static/css/main.471ab6b8.css.map",
+    "main.30690011.js.map": "/books-app/static/js/main.30690011.js.map",
     "787.e27c011a.chunk.js.map": "/books-app/static/js/787.e27c011a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.aa41c4ce.css",
-    "static/js/main.3166d1d0.js"
+    "static/css/main.471ab6b8.css",
+    "static/js/main.30690011.js"
   ]
 }

@@ -6,7 +6,7 @@ const LiItem = (props) => {
 
   return (
     
-    <li className="book-item ">
+    <li className="book-item w-4/5 sm:w-full">
       <div className="bk-img">
         <div className="bk-wrapper">
           <div onClick={props.showDetails} className="bk-book bk-bookdefault cursor-pointer">
