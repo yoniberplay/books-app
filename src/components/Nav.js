@@ -17,36 +17,31 @@ const searchClick = ( e )=> {
     }
     searchElement.current.value = "";
   }
-
-  
   
 }
-
-
-
   
   return (
     <div className="toolbar ">
       <div className="flex flex-col	md:flex-row	justify-between mb-3 z-20 ">
         <div className="mt-3">
-          <a href="#allcategories" onClick={props.clickallcategories} className="filter-item " data-group="all">
+          <button  onClick={()=> {props.onCategoryClick({ type: 'loadData' })}} className="filter-item boton " data-group="all">
             All Categories
-          </a>
-          <a onClick={()=> {props.onCategoryClick({ type: 'bk-fantasy' })}} href="#Fantasy" className="filter-item" data-group="fantasy">
+          </button>
+          <button onClick={()=> {props.onCategoryClick({ type: 'bk-fantasy' })}}  className="filter-item boton" data-group="fantasy">
             Fantasy
-          </a>
-          <a onClick={()=> {props.onCategoryClick({ type: 'bk-scifi' })}} href="#Sci-Fi" className="filter-item" data-group="sci-fi">
+          </button>
+          <button onClick={()=> {props.onCategoryClick({ type: 'bk-scifi' })}}  className="filter-item boton" data-group="sci-fi">
             Sci-Fi
-          </a>
-          <a onClick={()=> {props.onCategoryClick({ type: 'bk-classics' })}} href="#Classics" className="filter-item" data-group="classic">
+          </button>
+          <button onClick={()=> {props.onCategoryClick({ type: 'bk-classics' })}}  className="filter-item boton" data-group="classic">
             Classics
-          </a>
-          <a onClick={()=> {props.onCategoryClick({ type: 'bk-fairy' })}} href="#Fairy-Tale" className="filter-item" data-group="fairy">
+          </button>
+          <button onClick={()=> {props.onCategoryClick({ type: 'bk-fairy' })}}  className="filter-item boton" data-group="fairy">
             Fairy Tale
-          </a>
-          <a onClick={()=> {props.onCategoryClick({ type: 'bk-youngadultu' })}} href="#Young-Adult" className="filter-item" data-group="young">
+          </button>
+          <button onClick={()=> {props.onCategoryClick({ type: 'bk-youngadultu' })}}  className="filter-item boton" data-group="young">
             Young Adult
-          </a>
+          </button>
         </div>
 
         <div className="flex mt-5 md:m-0 ">

@@ -59,40 +59,17 @@
 
 const Getdata = async () => {
 
-  // fetch("https://library-920b7-default-rtdb.firebaseio.com/books.json")
-  //   .then(response => {
-  //     const list =  response.json();
-  //     const loadedMovies = [];
-  //   for (const key in list) {
-  //     loadedMovies.push({
-  //       id: list[key].id,
-  //       Title: list[key].Title,
-  //       Author: list[key].Author,
-  //       Category: list[key].Category,
-  //       Year: list[key].Year,
-  //       Details: list[key].Details,
-  //     });
-  //     console.log(key)
-  //   }
-   
-  //   return loadedMovies;
-  //   })
-  //   .catch(error => {
-  //     console.log(error.message);
-  //   });
-
-
   try {
-
     const response = await fetch(
       "https://library-920b7-default-rtdb.firebaseio.com/books.json"
     );
     if (!response.ok) {
-      throw new Error("Something went wrong.");
+      throw new Error("Something went wrong!");
     }
-    const list = await response.json();
 
+    const list = await response.json();
     const loadedMovies = [];
+
     for (const key in list) {
       loadedMovies.push({
         id: list[key].id,
@@ -103,11 +80,10 @@ const Getdata = async () => {
         Details: list[key].Details,
       });
     }
-   
-    return loadedMovies;
-  } catch (e) {
-    console.log(e.message);
-  }
+   return loadedMovies;
+  } catch (error) {}
+
+
 };
 
 export default Getdata;

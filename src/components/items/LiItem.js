@@ -19,10 +19,10 @@ const LiItem = (props) => {
         </div>
       </div>
 
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap flow-root	">
         
         <h3 className="">{props.Title}</h3>
-        <p className="author">
+        <p className="author ">
           by {props.Author} &bull; {props.Year}
         </p>
 

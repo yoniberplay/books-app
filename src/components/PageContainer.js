@@ -3,56 +3,14 @@ import Footer from "../components/Footer";
 import "../App.scss";
 import Nav from "./Nav";
 import ListLiItem from "./items/ListLiItem";
-import Getdata from "./data";
 import ModalContext from "./ModalContext";
-
+import Getdata from "./data";
 
 const initialstate = {
   itemlist:[],
 }
 
-
-function reducer(state, action) {
-
-
-  switch (action.type) {
-  
-    case "allcategories":
-      return {
-        ...state,
-        itemlist: action.itemlist,
-      }
-    case "onSearchClick":
-      return {
-        itemlist: action.itemlist,
-      };
-    case "bk-fantasy":
-      return {
-        itemlist: categorySearch(state.itemlist, "bk-fantasy"),
-      };
-    case "bk-scifi":
-      return {
-        itemlist: categorySearch(state.itemlist, "bk-scifi"),
-      };
-    case "bk-classics":
-      return {
-        itemlist: categorySearch(state.itemlist, "bk-classics"),
-      };
-    case "bk-youngadultu":
-      return {
-        itemlist: categorySearch(state.itemlist, "bk-youngadultu"),
-      };
-    case "bk-fairy":
-      return {
-        itemlist: categorySearch(state.itemlist, "bk-fairy"),
-      };
-
-    default:
-      return {
-        itemlist: [{}],
-      };
-  }
-}
+let data;
 
 function categorySearch(array, categoryName) {
   let items = array.filter((d) => d.Category === categoryName);
@@ -61,56 +19,72 @@ function categorySearch(array, categoryName) {
 
 const PageContainer = (props) => {
 
-  
-
   const [searching, setsearching] = useState(false);
   const [showModal, setshowModal] = useState(false);
-  const [Datos, setDatos] = useState([]);
-  const [state, dispatch] = useReducer(reducer, initialstate);
+  
 
   const fetchBooksHandler = useCallback(async () => {
-
-    try {
-      const response = await fetch(
-        "https://library-920b7-default-rtdb.firebaseio.com/books.json"
-      );
-      if (!response.ok) {
-        throw new Error("Something went wrong!");
-      }
-
-      const list = await response.json();
-      const loadedMovies = [];
-
-      for (const key in list) {
-        loadedMovies.push({
-          id: list[key].id,
-          Title: list[key].Title,
-          Author: list[key].Author,
-          Category: list[key].Category,
-          Year: list[key].Year,
-          Details: list[key].Details,
-        });
-      }
-      //setDatos(loadedMovies);
-      dispatch({ type: "allcategories", itemlist: loadedMovies });
-    } catch (error) {}
+    const loadedMovies = await Getdata();
+    data=loadedMovies;
+    dispatch({ type: "allcategories", itemlist: loadedMovies });
   }, []);
 
+  const [state, dispatch] = useReducer((state, action)=>{
+    switch (action.type) {
+  
+      case "allcategories":
+        setsearching(false)
+        return {
+          ...state,
+          itemlist: action.itemlist,
+        }
+        case "loadData":
+          setsearching(true)
+          fetchBooksHandler();
+          return {
+            ...state,            
+          }  
+      case "onSearchClick":
+        return {
+          itemlist: action.itemlist,
+        };
+      case "bk-fantasy":
+        return {
+          itemlist: categorySearch(data, "bk-fantasy"),
+        };
+      case "bk-scifi":
+        return {
+          itemlist: categorySearch(data, "bk-scifi"),
+        };
+      case "bk-classics":
+        return {
+          itemlist: categorySearch(data, "bk-classics"),
+        };
+      case "bk-youngadultu":
+        return {
+          itemlist: categorySearch(data, "bk-youngadultu"),
+        };
+      case "bk-fairy":
+        return {
+          itemlist: categorySearch(data, "bk-fairy"),
+        };
+  
+      default:
+        return {
+          itemlist: [{}],
+        };
+    }
+  }, initialstate);
+
   useEffect(() => {
-    fetchBooksHandler();
+    dispatch({ type: "loadData" });
     // console.log('#####')
-  }, [fetchBooksHandler]);
+  }, []);
 
   const onSearchClick = (name) => {
     setsearching(true);
-    let items = Datos.data.filter((d) => d.Title.toUpperCase() === name);
-    dispatch({ type: "onSearchClick", data: items });
-    setsearching(false);
-  };
-
-  const clickallcategories = () => {
-    setsearching(true);
-    dispatch({ type: "allcategories" });
+    let items = data.filter((d) => d.Title.toUpperCase() === name);
+    dispatch({ type: "onSearchClick", itemlist: items });
     setsearching(false);
   };
 
@@ -129,7 +103,6 @@ const PageContainer = (props) => {
           <Nav
             onSearchClick={onSearchClick}
             onCategoryClick={dispatch}
-            clickallcategories={clickallcategories}
           ></Nav>
           {searching ? (
             <div className="lds-dual-ring"></div>

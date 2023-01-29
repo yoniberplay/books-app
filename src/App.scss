@@ -89,7 +89,7 @@ body {
 
 body,
 p,
-a,
+a,.boton,
 li {
   font-family: $body-font-family;
   font-size: 15px;
@@ -180,12 +180,10 @@ p.author {
   .filter-options {
     line-height: 40px;
   }
-  a.filter-item {
+  button.filter-item {
     margin-right: 16px;
-    padding-bottom: 18px;
     font-size: 14px;
     color: $dark-gray;
-    //border-bottom: 0px solid transparent;
     transition: all 250ms ease-out;
     &:last-child {
       margin-right: 0;

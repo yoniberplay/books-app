@@ -28,6 +28,7 @@
       "react-app/jest"
     ]
   },
+  "homepage": "/books-app/",
   "browserslist": {
     "production": [
       ">0.2%",
