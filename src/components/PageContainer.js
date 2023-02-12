@@ -25,8 +25,15 @@ const PageContainer = (props) => {
 
   const fetchBooksHandler = useCallback(async () => {
     const loadedMovies = await Getdata();
+    if(typeof loadedMovies !== 'undefined'){
     data=loadedMovies;
     dispatch({ type: "allcategories", itemlist: loadedMovies });
+    }else{
+      data=localItem;
+      dispatch({ type: "allcategories", itemlist: localItem });
+      console.log('Failet fetch to firebase, using localbooks.');
+    }
+    
   }, []);
 
   const [state, dispatch] = useReducer((state, action)=>{
@@ -78,12 +85,11 @@ const PageContainer = (props) => {
 
   useEffect(() => {
     dispatch({ type: "loadData" });
-    // console.log('#####')
   }, []);
 
   const onSearchClick = (name) => {
     setsearching(true);
-    let items = data.filter((d) => d.Title.toUpperCase() === name);
+    let items = data.filter((d) => d.Title.toUpperCase().includes(name));
     dispatch({ type: "onSearchClick", itemlist: items });
     setsearching(false);
   };
@@ -127,81 +133,64 @@ const PageContainer = (props) => {
   );
 };
 
-// const post = async ( param ) => {
 
-//   const item = [
-//       {
-//         id: 1,
-//         Title: "Of Mice and Men",
-//         Author: "John Steinbeck",
-//         Year: 1937,
-//         Category: "bk-left",
-//         Details:
-//           "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tellus nisi, eget pulvinar in, molestie et arcu",
-//       },
-//       {
-//         id: 2,
-//         Title: "The Catcher in the Rye",
-//         Author: " J.D. Salinger",
-//         Year: 1951,
-//         Category: "bk-fantasy",
-//         Details:
-//           "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tellus nisi, eget pulvinar in, molestie et arcu",
-//       },
-//       {
-//         id: 3,
-//         Title: "The Great Gatsby",
-//         Author: "F. Scott Fitzgerald",
-//         Year: 1925,
-//         Category: "bk-youngadultu",
-//         Details:
-//           "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tellus nisi, eget pulvinar in, molestie et arcu",
-//       },
-//       {
-//         id: 4,
-//         Title: "Lord of the Flies",
-//         Author: "William Golding",
-//         Year: 1954,
-//         Category: "bk-classics",
-//         Details:
-//           "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tellus nisi, eget pulvinar in, molestie et arcu",
-//       },
-//       {
-//         id: 33,
-//         Title: "Harry Potter and the Order of the Phoenix    ",
-//         Author: "J.K. Rowling",
-//         Year: 2003,
-//         Category: "bk-scifi",
-//         Details:
-//           "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tellus nisi, eget pulvinar in, molestie et arcu",
-//       },
-//       {
-//         id: 5,
-//         Title: "A Clockwork Orange",
-//         Author: "Anthony Burgess",
-//         Year: 1962,
-//         Category: "bk-fairy",
-//         Details:
-//           "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tellus nisi, eget pulvinar in, molestie et arcu",
-//       },
-//     ];
+  const localItem = [
+      {
+        id: 1,
+        Title: "Of Mice and Men",
+        Author: "John Steinbeck",
+        Year: 1937,
+        Category: "bk-left",
+        Details:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tellus nisi, eget pulvinar in, molestie et arcu",
+      },
+      {
+        id: 2,
+        Title: "The Catcher in the Rye",
+        Author: " J.D. Salinger",
+        Year: 1951,
+        Category: "bk-fantasy",
+        Details:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tellus nisi, eget pulvinar in, molestie et arcu",
+      },
+      {
+        id: 3,
+        Title: "The Great Gatsby",
+        Author: "F. Scott Fitzgerald",
+        Year: 1925,
+        Category: "bk-youngadultu",
+        Details:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tellus nisi, eget pulvinar in, molestie et arcu",
+      },
+      {
+        id: 4,
+        Title: "Lord of the Flies",
+        Author: "William Golding",
+        Year: 1954,
+        Category: "bk-classics",
+        Details:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tellus nisi, eget pulvinar in, molestie et arcu",
+      },
+      {
+        id: 33,
+        Title: "Harry Potter and the Order of the Phoenix    ",
+        Author: "J.K. Rowling",
+        Year: 2003,
+        Category: "bk-scifi",
+        Details:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tellus nisi, eget pulvinar in, molestie et arcu",
+      },
+      {
+        id: 5,
+        Title: "A Clockwork Orange",
+        Author: "Anthony Burgess",
+        Year: 1962,
+        Category: "bk-fairy",
+        Details:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tellus nisi, eget pulvinar in, molestie et arcu",
+      },
+    ];
 
-//     for (const i of item) {
-//       const response = await fetch('https://library-920b7-default-rtdb.firebaseio.com/books.json',{
-//         method: 'POST',
-//         body: JSON.stringify(i),
-//         headers: {
-//           'Content-Type': 'application/json'
-//         }
-//       });
-//       const res = await response.json;
-  
-      
-      
-//     }
-
-   
-
-// }
+    
 
 export default PageContainer;
